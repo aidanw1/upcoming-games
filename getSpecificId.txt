@@ -1,0 +1,20 @@
+How to get details of a game
+. each game 
+. api accepts an id at the end which we will dynamically pass in
+export const gameDetailsURL = (game_id) => `${base_url}games/${game_id}`;
+. pass in an id to the action you are creating
+. axios.get request - the id argument from loadDetail gets passed in to the url
+. when we dispatch the loadDetail action thats when we will pass
+ in the game id which is being mapped over for each item
+ dispatch(loadDetail(game.id))
+export const loadDetail = (id) => async (dispatch) => {
+//passes in an id from the action
+  const detailData = await axios.get(gameDetailsURL(id));
+
+  dispatch({
+    type: "GET_DETAIL",
+    payload: {
+      game: detailData.data,
+    },
+  });
+};
